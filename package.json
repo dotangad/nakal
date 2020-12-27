@@ -1,0 +1,23 @@
+{
+  "name": "nakal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "nakal": "bin/nakal"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "argparse": "^2.0.1",
+    "boxen": "^4.2.0",
+    "chalk": "^3.0.0",
+    "esm": "^3.2.25",
+    "prompts": "^2.4.0",
+    "yargs": "^16.2.0"
+  }
+}
