@@ -13,11 +13,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "argparse": "^2.0.1",
-    "boxen": "^4.2.0",
-    "chalk": "^3.0.0",
-    "esm": "^3.2.25",
-    "prompts": "^2.4.0",
     "yargs": "^16.2.0"
   }
 }
