@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "googleapis": "^66.0.0",
     "mysql": "^2.18.1",
     "yargs": "^16.2.0"
   }
