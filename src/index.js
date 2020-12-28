@@ -2,7 +2,7 @@ const yargs = require("yargs");
 const fs = require("fs");
 const { promisify } = require("util");
 const { connect, tables, records, end } = require("./db");
-const { authenticate, write } = require("./sheets");
+const { write } = require("./sheets");
 
 module.exports = async function (_args) {
   const options = yargs
@@ -72,12 +72,7 @@ module.exports = async function (_args) {
 
     const time = new Date().getTime();
 
-    const auth = authenticate(
-      credentials["client_email"],
-      credentials["private_key"]
-    );
-
-    await write(auth, data, sheetId, time);
+    await write(credentials, data, sheetId, time);
 
     end(conn);
   } catch (e) {

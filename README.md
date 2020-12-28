@@ -1,5 +1,6 @@
 # nakal - Backup MySQL databases to Google Sheets
 
 ## TODO
-- [ ] Get Google Sheets working
+- [x] Get Google Sheets working
 - [ ] Write documentation
+- [ ] Create spreadsheet command
