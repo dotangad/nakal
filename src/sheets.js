@@ -8,7 +8,7 @@ module.exports = {
       "https://www.googleapis.com/auth/spreadsheets",
     ]);
   },
-  write: async function (auth, data, sheetId, time) {
+  write: async function (auth, data, sheetId, time, credentials) {
     const spreadsheets = google.sheets({ version: "v4", auth });
     let spreadsheet;
     try {
@@ -24,23 +24,23 @@ module.exports = {
     const sheetIndexes = {};
     try {
       for (let { table } of data) {
-        sheetIndexes[table] = (
-          await spreadsheets.spreadsheets.batchUpdate({
-            spreadsheetId: sheetId,
-            requestBody: {
-              includeSpreadsheetInResponse: true,
-              requests: [
-                {
-                  addSheet: {
-                    properties: {
-                      title: `${time}-${table}`,
-                    },
+        const r = await spreadsheets.spreadsheets.batchUpdate({
+          spreadsheetId: sheetId,
+          requestBody: {
+            includeSpreadsheetInResponse: true,
+            requests: [
+              {
+                addSheet: {
+                  properties: {
+                    title: `${time}-${table}`,
                   },
                 },
-              ],
-            },
-          })
-        ).data.replies[0].addSheet.properties.index;
+              },
+            ],
+          },
+        });
+
+        sheetIndexes[table] = r.data.replies[0].addSheet.properties.index;
       }
     } catch (e) {
       console.error("Error creating sheets");
@@ -48,7 +48,28 @@ module.exports = {
       process.exit(1);
     }
 
-    console.log(sheetIndexes);
+    try {
+      spreadsheet = await spreadsheets.spreadsheets.get({
+        spreadsheetId: sheetId,
+      });
+
+      console.log(spreadsheet.data.sheets);
+
+      for (let { table, rows, headers } of data) {
+        const range = `${time}-${table}!A1:${time}-${table}!${String.fromCharCode(
+          64 + headers.length
+        )}${rows.length + 1}`;
+        const values = [headers, ...rows.map(Object.values)];
+        await spreadsheets.spreadsheets.values.batchUpdate({
+          spreadsheetId: sheetId,
+          resource: { data: [{ range, values }], valueInputOption: "RAW" },
+        });
+      }
+    } catch (e) {
+      console.error("Error creating sheets");
+      // console.error(e);
+      process.exit(1);
+    }
 
     return;
   },
