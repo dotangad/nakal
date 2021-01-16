@@ -7,7 +7,7 @@ const { write } = require("./sheets");
 module.exports = async function (_args) {
   const options = yargs
     .usage("Usage: nakal <options> <sheet_id>")
-    .epilogue("Backup MySQL databases to Google Sheets")
+    .epilogue("A MySQL backup tool for Google Sheets.")
     .option("h", {
       alias: "host",
       describe: "MySQL host",
@@ -60,6 +60,10 @@ module.exports = async function (_args) {
     process.exit(1);
   }
 
+  sheet(host, user, pass, db, sheetId, credentials);
+};
+
+async function sheet(host, user, pass, db, sheetId, credentials) {
   try {
     const conn = connect(host, user, pass, db);
 
@@ -79,4 +83,4 @@ module.exports = async function (_args) {
     console.error(e);
     process.exit(1);
   }
-};
+}
