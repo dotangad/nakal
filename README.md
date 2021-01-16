@@ -8,8 +8,6 @@ At [Exun Clan](https://exunclan.com), my school's CS club, we usually build an a
 
 ## How
 
-Read the code [here](https://github.com/dotangad/nakal).
-
 I'd never written a CLI with Node.js before but I'd heard good things about [yargs](https://github.com/yargs/yargs/) so I decided to use it. It was easy enough to setup and didn't get in the way, 10/10. I used the [`google-spreadsheet`](https://www.npmjs.com/package/google-spreadsheet) package to edit spreadsheets.
 
 I started by writing a function to fetch tables and their contents from the database and another function to put those into a Google Sheet. The user needs to make the Google Sheet, share it with the client email and give me the sheetId and the functions populate that sheet with data.
