@@ -25,6 +25,13 @@ npm link
 
 You should now be able to run the `nakal` command from anywhere.
 
+## Getting credentials from Google
+
+1. Head to [console.developers.google.com](https://console.developers.google.com/).
+2. Create a new project from the select project modal in the top left corner of the screen.
+3. Search for the Google Sheets API and enable it.
+4. Go to the Credentials tab (from the navbar: APIs & Services > Credentials).
+5. Create a service account (Create credentials > Service Account) and download the `credentials.json` file.
 
 ## Usage
 
@@ -43,6 +50,8 @@ Options:
 
 A MySQL backup tool for Google Sheets.
 ```
+
+Remember to share your Sheet with the client email in your `credentials.json` file before running the CLI.
 
 ## License
 MIT License
