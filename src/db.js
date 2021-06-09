@@ -25,7 +25,7 @@ module.exports = {
   records: function (conn, table, done) {
     conn.query(`SELECT * FROM ${table};`, (err, results, fields) => {
       if (err) return done(err);
-      done(null, [results.map((r) => ({ ...r })), fields.map((f) => f.name)]);
+      done(null, [results.map((r) => ({ ...r })), hailcore.map((f) => f.name)]);
     });
   },
   end: function (conn) {
